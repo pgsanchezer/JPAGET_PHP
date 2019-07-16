@@ -29,35 +29,35 @@
                         <th class="empty"></th>
                     </tr>
                     <?php 
-                    try {
-    $bdd = new PDO ('mysql:host=localhost;dbname=minisite', 'root', '');} catch (Exception $e)
-{
-    die ('Erreur : ' . $e->getMessage());
-}
-                    $reponse = $bdd->query('SELECT * FROM `utilisateurs`');
-                    while ($donnees = $reponse->fetch())
-                    {
-                        ?>
-                    <tr>
-                        <td> <?php echo $donnees ['prenom'] ?> </td>
-                        <td> <?php echo $donnees['nom'] ?> </td>
-                        <td> <?php echo $donnees ['mail']?> </td>
-                        <td> <?php echo $donnees ['mot_de_passe']?></td>
-                        <td>
-                            <button class="blue">Editer</button>
-                        </td>
-                        <td>
-                            <button class="red">Supprimer</button>
-                        </td>
-
-                    </tr>
-
+                        try {
+                            $bdd = new PDO ('mysql:host=localhost;dbname=minisite', 'root', '');} catch (Exception $e)
+                        {
+                            die ('Erreur : ' . $e->getMessage());
+                        }
+                        $reponse = $bdd->query('SELECT * FROM `utilisateurs`');
+                        while ($donnees = $reponse->fetch())
+                        {
+                            $id=$donnees['id'];
+                            echo "<tr>"
+                                ."<td>".$donnees ['prenom']."</td>"
+                                ."<td>".$donnees['nom']."</td>"
+                                ."<td>".$donnees['mail']."</td>"
+                                ."<td>".$donnees['mot_de_passe']."</td>"
+                                ."<td>"
+                                    ."<a href='editer_utilisateur.php?id=".$donnees['id']."' class='blue'>Editer</a>
+                                </td>
+                                <td>
+                                    <button class='red'>Supprimer</button>
+                                </td>
+                                </tr>";
+                        }
+                    ?>
                     <?php
                     } 
                     $reponse->closeCursor();
  
                     ?>
-                </table>
+                </table>        
             </div>
         </div>
     </div>
